@@ -2,6 +2,14 @@ import subprocess
 from pathlib import Path
 
 outputs = Path("/data/outputs")
+inputs = Path("/data/inputs")
+
+input_files = []
+for ext in ['shp', 'gpkg']:
+    input_files.extend(list(inputs.glob(f"*/*.{ext}")))
+
+assert len(input_files) > 0, 'No input files found'
+
 outputs.mkdir(exist_ok=True)
 
 subprocess.call(['gdal_rasterize',
@@ -9,7 +17,8 @@ subprocess.call(['gdal_rasterize',
                  '-tr', '1', '1',
                  '-co', 'COMPRESS=LZW', '-co', 'NUM_THREADS=ALL_CPUS',
                  '-ot', 'UInt16',
-                 '/data/inputs/polygons/green_belt.gpkg', outputs / 'green_belt_1m.tif'])
+                 '-at',  # all pixels touched by polygons will be burned
+                 input_files[0], outputs / 'coverage_1m.tif'])
 
 subprocess.call(['gdalwarp',
                  '-tr', '100', '100',
@@ -17,4 +26,4 @@ subprocess.call(['gdalwarp',
                  '-co', 'COMPRESS=LZW', '-co', 'NUM_THREADS=ALL_CPUS',
                  '-ot', 'UInt16',
                  '-overwrite',
-                 outputs / 'green_belt_1m.tif', outputs / 'green_belt_100m.tif'])
+                 outputs / 'coverage_1m.tif', outputs / 'coverage_100m.tif'])
