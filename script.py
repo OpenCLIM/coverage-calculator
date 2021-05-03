@@ -1,5 +1,6 @@
 import subprocess
 from pathlib import Path
+import os
 
 outputs = Path("/data/outputs")
 inputs = Path("/data/inputs")
@@ -12,12 +13,19 @@ assert len(input_files) > 0, 'No input files found'
 
 outputs.mkdir(exist_ok=True)
 
+extent = os.getenv('EXTENT')
+if extent == 'None' or extent is None:
+    extent = []
+else:
+    extent = ['-te', *extent.split(',')]
+
 subprocess.call(['gdal_rasterize',
                  '-burn', '1',
                  '-tr', '1', '1',
                  '-co', 'COMPRESS=LZW', '-co', 'NUM_THREADS=ALL_CPUS',
                  '-ot', 'UInt16',
                  '-at',  # all pixels touched by polygons will be burned
+                 *extent,
                  input_files[0], outputs / 'coverage_1m.tif'])
 
 subprocess.call(['gdalwarp',
