@@ -22,7 +22,7 @@ spec:
         description: GeoPackage (.gpkg) or Shapefile (.shp) dataset containing polygons
         default:
           - uid: f4e58421-5a13-4db6-b15f-d404f7b133cf
-            versionUid: 94212bef-661d-4964-bcc1-50930dca3c3d
+            versionUid: f72ac585-87b5-4c3c-b61b-81e16f6a70cc
         path: inputs/polygons
         required: true
 
