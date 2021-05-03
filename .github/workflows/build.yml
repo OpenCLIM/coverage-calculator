@@ -15,4 +15,4 @@ jobs:
         run: docker run -v $PWD/data:/data --name coverage-calculator coverage-calculator
 
       - name: test extent
-        run: docker run -v $PWD/data:/data --env EXTENT=419284,570156,420836,571597 --name coverage-calculator coverage-calculator
+        run: docker run -v $PWD/data:/data --env EXTENT=419284,570156,420836,571597 --name coverage-calculator-extent coverage-calculator
