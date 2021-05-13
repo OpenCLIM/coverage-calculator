@@ -6,6 +6,8 @@ import logging
 outputs = Path("/data/outputs")
 inputs = Path("/data/inputs")
 
+outputs.mkdir(exist_ok=True)
+
 logger = logging.getLogger('coverage_calculator')
 logger.setLevel(logging.INFO)
 fh = logging.FileHandler(outputs / 'coverage_calculator.log')
@@ -18,8 +20,6 @@ for ext in ['shp', 'gpkg']:
     input_files.extend(list(inputs.glob(f"*/*.{ext}")))
 
 assert len(input_files) > 0, 'No input files found'
-
-outputs.mkdir(exist_ok=True)
 
 extent = os.getenv('EXTENT')
 if extent == 'None' or extent is None:
