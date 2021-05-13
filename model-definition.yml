@@ -35,3 +35,7 @@ spec:
       - name: outputs/coverage_100m.tif
         type: GeoTIFF
         desc: Coverage of polyons (m2)
+
+      - name: outputs/coverage_calculator.log
+        type: Text
+        desc: Log output

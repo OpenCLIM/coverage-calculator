@@ -1,9 +1,17 @@
 import subprocess
 from pathlib import Path
 import os
+import logging
 
 outputs = Path("/data/outputs")
 inputs = Path("/data/inputs")
+
+logger = logging.getLogger('coverage_calculator')
+logger.setLevel(logging.INFO)
+fh = logging.FileHandler(outputs / 'coverage_calculator.log')
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 input_files = []
 for ext in ['shp', 'gpkg']:
@@ -19,6 +27,9 @@ if extent == 'None' or extent is None:
 else:
     extent = ['-te', *extent.split(',')]
 
+selected_file = input_files[0]
+logger.info(f'Rasterizing {selected_file}')
+
 subprocess.call(['gdal_rasterize',
                  '-burn', '1',
                  '-tr', '1', '1',
@@ -26,7 +37,11 @@ subprocess.call(['gdal_rasterize',
                  '-ot', 'UInt16',
                  '-at',  # all pixels touched by polygons will be burned
                  *extent,
-                 input_files[0], outputs / 'coverage_1m.tif'])
+                 selected_file, outputs / 'coverage_1m.tif'])
+
+logger.info('Rasterizing completed')
+
+logger.info('Upscaling raster')
 
 subprocess.call(['gdalwarp',
                  '-tr', '100', '100',
@@ -35,3 +50,5 @@ subprocess.call(['gdalwarp',
                  '-ot', 'UInt16',
                  '-overwrite',
                  outputs / 'coverage_1m.tif', outputs / 'coverage_100m.tif'])
+
+logger.info('Upscaling completed')
