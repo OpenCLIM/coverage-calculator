@@ -9,10 +9,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: build image
-        run: docker build -t coverage-calculator .
+        run: docker build -t udm-rasterise-coverage .       
 
       - name: test
-        run: docker run -v $PWD/data:/data --name coverage-calculator coverage-calculator
-
-      - name: test extent
-        run: docker run -v $PWD/data:/data --env EXTENT=419284,570156,420836,571597 --name coverage-calculator-extent coverage-calculator
+        run: docker run -v $PWD/data:/data --env EXTENT=459000,202000,501000,244000 --env LAYER=test_layer --name udm-rasterise-coverage udm-rasterise-coverage 
+              

@@ -1,4 +1,4 @@
-FROM osgeo/gdal:alpine-ultrasmall-3.2.0
+FROM osgeo/gdal:alpine-small-latest
 
 RUN apk add --no-cache --upgrade bash
 

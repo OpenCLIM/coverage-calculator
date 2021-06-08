@@ -1,20 +1,26 @@
 kind: Model
 apiVersion: v1alpha4
 metadata:
-  displayName: Coverage Calculator
+  displayName: UDM Rasterise Coverage 
   type: Modelling
-  name: coverage-calculator
+  name: udm-rasterise-coverage
   summary: Tool for creating raster coverage layers from polygons
   description: >
-    Creates a GeoTIFF with coverage of polygons inside 100m grid cells.
-    https://github.com/openclim/coverage-calculator
+    Creates an ASCII raster with coverage of polygons inside 100m grid cells.
+    https://github.com/openclim/udm-rasterise-coverage
 spec:
   inputs:
     env:
       - name: EXTENT
-        title: Extent
+        title: extent
         type: string
         desc: Must be formatted `<xmin>,<ymin>,<xmax>,<ymax>`. If not provided then the input data extent will be used.
+        default: None
+
+      - name: LAYER
+        title: layer
+        type: string
+        desc: Name of rasterised coverage layer which is appended with _coverage_100m.asc by the model. 
         default: None
 
     dataslots:
@@ -28,14 +34,10 @@ spec:
 
   outputs:
     datasets:
-      - name: outputs/coverage_1m.tif
-        type: GeoTIFF
-        desc: Output of rasterization
-
-      - name: outputs/coverage_100m.tif
-        type: GeoTIFF
+      - name: outputs/layer_coverage_100m.asc
+        type: ASCII
         desc: Coverage of polyons (m2)
 
-      - name: outputs/coverage_calculator.log
+      - name: outputs/udm-rasterise-coverage.log
         type: Text
         desc: Log output
