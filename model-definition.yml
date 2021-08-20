@@ -16,12 +16,14 @@ spec:
         type: string
         description: Must be formatted `<xmin>,<ymin>,<xmax>,<ymax>`. If not provided then the input data extent will be used.
         default: None
+        required: true
 
       - name: LAYER
         title: layer
         type: string
         description: Name of rasterised coverage layer which is appended with _coverage_100m.asc by the model.
         default: None
+        required: true
 
     dataslots:
       - name: Polygons
