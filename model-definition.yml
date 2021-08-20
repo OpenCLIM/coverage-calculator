@@ -14,13 +14,13 @@ spec:
       - name: EXTENT
         title: extent
         type: string
-        desc: Must be formatted `<xmin>,<ymin>,<xmax>,<ymax>`. If not provided then the input data extent will be used.
+        description: Must be formatted `<xmin>,<ymin>,<xmax>,<ymax>`. If not provided then the input data extent will be used.
         default: None
 
       - name: LAYER
         title: layer
         type: string
-        desc: Name of rasterised coverage layer which is appended with _coverage_100m.asc by the model. 
+        description: Name of rasterised coverage layer which is appended with _coverage_100m.asc by the model.
         default: None
 
     dataslots:
@@ -36,8 +36,8 @@ spec:
     datasets:
       - name: outputs/layer_coverage_100m.asc
         type: ASCII
-        desc: Coverage of polyons (m2)
+        description: Coverage of polyons (m2)
 
       - name: outputs/udm-rasterise-coverage.log
         type: Text
-        desc: Log output
+        description: Log output
