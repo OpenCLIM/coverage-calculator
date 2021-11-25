@@ -29,7 +29,7 @@ spec:
       - name: Polygons
         description: GeoPackage (.gpkg) or Shapefile (.shp) dataset containing polygons
         default:
-          - f4e58421-5a13-4db6-b15f-d404f7b133cf
+          - f72ac585-87b5-4c3c-b61b-81e16f6a70cc
         path: inputs/polygons
         required: true
 
