@@ -2,6 +2,9 @@ import subprocess
 from pathlib import Path
 import os
 import logging
+import string
+import random
+
 #import variables as v
 
 #------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +31,8 @@ outputs.mkdir(exist_ok=True)
 #configure output
 logger = logging.getLogger('udm-rasterise-coverage')
 logger.setLevel(logging.INFO)
-fh = logging.FileHandler(outputs / 'udm-rasterise-coverage.log')
+log_name = 'udm-rasterise-coverage-%s.log' %(''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6)))
+fh = logging.FileHandler(outputs / log_name)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 fh.setFormatter(formatter)
 logger.addHandler(fh)
