@@ -1,10 +1,10 @@
 kind: Model
-apiVersion: v1alpha5
+api_version: v1beta1
 metadata:
-  displayName: UDM Rasterise Coverage 
-  type: Modelling
+  display_name: UDM Rasterise Coverage
   name: udm-rasterise-coverage
   summary: Tool for creating raster coverage layers from polygons
+  publisher: Newcastle University
   description: >
     Creates an ASCII raster with coverage of polygons inside 100m grid cells.
     https://github.com/openclim/udm-rasterise-coverage
