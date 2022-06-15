@@ -49,7 +49,7 @@ if len(input_polygons) > 1:
     input_file_name = os.getenv('INPUTFILE')
     #selected_polygons = [s for s in input_polygons if input_file_name in s]
     for file in input_polygons:
-        if input_file_name in file:
+        if input_file_name in str(file):
             selected_polygons = file
             break
     #selected_polygons = selected_polygons[0]
