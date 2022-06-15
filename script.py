@@ -4,6 +4,8 @@ import os
 import logging
 import string
 import random
+import rasterio
+import geojson
 
 #import variables as v
 

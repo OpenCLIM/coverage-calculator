@@ -8,6 +8,8 @@ RUN mkdir /src
 
 WORKDIR /src
 
+RUN pip3 install rasterio geojson
+
 COPY script.py .
 
 CMD python script.py
