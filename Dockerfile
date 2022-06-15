@@ -1,14 +1,16 @@
-FROM osgeo/gdal:alpine-small-latest
+FROM python:3.8
 
-RUN apk add --no-cache --upgrade bash
+RUN apt-get -y update
 
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN apt-get -y install
+
+RUN apt-get install gdal-bin -y
+
+RUN pip3 install rasterio geojson
 
 RUN mkdir /src
 
 WORKDIR /src
-
-RUN pip3 install rasterio geojson
 
 COPY script.py .
 

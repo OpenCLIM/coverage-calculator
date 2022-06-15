@@ -1,11 +1,13 @@
 import subprocess
 from pathlib import Path
 import os
+from os.path import join
 import logging
 import string
 import random
 import rasterio
-import geojson
+from geojson import Polygon
+from datetime import datetime
 
 #import variables as v
 
@@ -177,12 +179,9 @@ if os.getenv('OUTPUTTITLE') is not None:
     bbox = dataset.bounds
     geojson = Polygon([[(bbox.left,bbox.top), (bbox.right, bbox.top), (bbox.right,bbox.bottom), (bbox.left, bbox.bottom)]])
 
-
     metadata = metadata_json_template(os.getenv('OUTPUTTITLE'), os.getenv('OUTPUTDESCRIPTION'), geojson)
 
-
-
     # write metadata json to file
-    with open(join(output_path, '%s.json' % file_name), 'w') as f:
+    with open(outputs / 'metadata_template.json', 'w') as f:
         f.write(metadata)
         

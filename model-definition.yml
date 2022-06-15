@@ -35,14 +35,14 @@ spec:
       - name: OUTPUTTITLE
         title: output title
         type: string
-        description: Title to be given to the dataset for the DAFNI data store
+        description: Title to be given to the dataset for the DAFNI data store if the metadata template within the model is used. Leave as default is not using. (File, metadata_template.json, written to outputs directory). 
         default: None
         required: false
         
       - name: OUTPUTDESCRIPTION
         title: output description
         type: string
-        description: Description of output data to be used for the assocaited metadata record
+        description: Description of output data to be used for the assocaited metadata record if metadata file is used.
         default: None
         required: false
 
