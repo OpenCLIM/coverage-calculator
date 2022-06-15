@@ -37,6 +37,54 @@ formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 fh.setFormatter(formatter)
 logger.addHandler(fh)
 
+#------------------------------------------------------------------------------------------------------------------------------
+#set output metadata file
+def metadata_json_template(output_title, output_description, bbox):
+    """
+    Generate a metadata json file used to catalogue the outputs of the UDM model on DAFNI
+    """
+
+    # Create metadata file
+    metadata = f"""{{
+      "@context": ["metadata-v1"],
+      "@type": "dcat:Dataset",
+      "dct:language": "en",
+      "dct:title": "{output_title}",
+      "dct:description": "{output_description}",
+      "dcat:keyword": [
+        "UDM"
+      ],
+      "dct:subject": "Environment",
+      "dct:license": {{
+        "@type": "LicenseDocument",
+        "@id": "https://creativecommons.org/licences/by/4.0/",
+        "rdfs:label": null
+      }},
+      "dct:creator": [{{"@type": "foaf:Organization"}}],
+      "dcat:contactPoint": {{
+        "@type": "vcard:Organization",
+        "vcard:fn": "DAFNI",
+        "vcard:hasEmail": "support@dafni.ac.uk"
+      }},
+      "dct:created": "{datetime.now().isoformat()}Z",
+      "dct:PeriodOfTime": {{
+        "type": "dct:PeriodOfTime",
+        "time:hasBeginning": null,
+        "time:hasEnd": null
+      }},
+      "dafni_version_note": "created",
+      "dct:spatial": {{
+        "@type": "dct:Location",
+        "rdfs:label": null
+      }},
+      "geojson": {bbox}
+    }}
+    """
+    
+    return metadata
+
+#------------------------------------------------------------------------------------------------------------------------------
+# rasterise process
 #get input polygons
 input_polygons = []
 for ext in ['shp', 'gpkg']:
@@ -120,3 +168,19 @@ logger.info('Translating completed')
 
 #------------------------------------------------------------------------------------------------------------------------------
 
+# if output title passed, assume metadat file not being used
+if os.getenv('OUTPUTTITLE') is not None:
+
+    dataset = rasterio.open(outputs / layer))
+    bbox = dataset.bounds
+    geojson = Polygon([[(bbox.left,bbox.top), (bbox.right, bbox.top), (bbox.right,bbox.bottom), (bbox.left, bbox.bottom)]])
+
+
+    metadata = metadata_json_template(os.getenv('OUTPUTTITLE'), os.getenv('OUTPUTDESCRIPTION'), geojson)
+
+
+
+    # write metadata json to file
+    with open(join(output_path, '%s.json' % file_name), 'w') as f:
+        f.write(metadata)
+        

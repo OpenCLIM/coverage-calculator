@@ -32,6 +32,20 @@ spec:
         default: None
         required: false
 
+      - name: OUTPUTTITLE
+        title: output title
+        type: string
+        description: Title to be given to the dataset for the DAFNI data store
+        default: None
+        required: false
+        
+      - name: OUTPUTDESCRIPTION
+        title: output description
+        type: string
+        description: Description of output data to be used for the assocaited metadata record
+        default: None
+        required: false
+
     dataslots:
       - name: Polygons
         description: GeoPackage (.gpkg) or Shapefile (.shp) dataset containing polygons
