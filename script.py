@@ -55,7 +55,7 @@ if len(input_polygons) > 1:
                 selected_polygons = file
                 break
     else:
-        selected_polygons = selected_polygons[0]
+        selected_polygons = input_polygons[0]
 else:
     selected_polygons = input_polygons[0]
 
