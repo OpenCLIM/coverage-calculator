@@ -18,4 +18,4 @@ jobs:
         run: docker run -v $PWD/data:/data --env EXTENT=459000,202000,501000,244000 --env INPUTFILE=test_region.shp --env LAYER=test_layer --name udm-rasterise-coverage-test2 udm-rasterise-coverage 
        
       - name: test3
-        run: docker run -v $PWD/data:/data --env EXTENT=459000,202000,501000,244000 --env INPUTFILE=test_region.shp --env LAYER=test_layer --env OUTPUTTITLE=test_output --env OUTPUTDESCRIPTION='A test output file' --name udm-rasterise-coverage-test2 udm-rasterise-coverage 
+        run: docker run -v $PWD/data:/data --env EXTENT=459000,202000,501000,244000 --env INPUTFILE=test_region.shp --env LAYER=test_layer --env OUTPUTTITLE=test_output --env OUTPUTDESCRIPTION='A test output file' --name udm-rasterise-coverage-test3 udm-rasterise-coverage 
