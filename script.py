@@ -43,7 +43,14 @@ for ext in ['shp', 'gpkg']:
     input_polygons.extend(list(inputs.glob(f"*/*.{ext}")))
 
 assert len(input_polygons) > 0, 'No input polygons found'
-selected_polygons = input_polygons[0]
+
+# use the first file in the list as the input polygons, or fetch the name passed if more than one input file found
+if len(input_polygons) > 1:
+    input_file_name = os.getenv('INPUTFILE')
+    selected_polygons = [s for s in input_polygons if input_file_name in s]
+    selected_polygons = selected_polygons[0]
+else:
+    selected_polygons = input_polygons[0]
 
 #get extent 'xmin,ymin,xmax,ymax'
 #extent = '459000,202000,501000,244000'

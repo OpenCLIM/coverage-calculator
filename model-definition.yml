@@ -6,7 +6,7 @@ metadata:
   summary: Tool for creating raster coverage layers from polygons
   publisher: Newcastle University
   description: >
-    Creates an ASCII raster with coverage of polygons inside 100m grid cells.
+    Creates an ASCII raster with coverage of polygons inside 100m grid cells. Accepts a single vector file as an input.
     https://github.com/openclim/udm-rasterise-coverage
 spec:
   inputs:
@@ -24,6 +24,13 @@ spec:
         description: Name of rasterised coverage layer which is appended with _coverage_100m.asc by the model.
         default: None
         required: true
+       
+      - name: INPUTFILE
+        title: input file
+        type: string
+        description: Only specify if multiple files within the input dataset and only one of those files is to be rasterised.
+        default: None
+        required: false
 
     dataslots:
       - name: Polygons
