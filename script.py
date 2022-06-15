@@ -171,7 +171,7 @@ logger.info('Translating completed')
 # if output title passed, assume metadat file not being used
 if os.getenv('OUTPUTTITLE') is not None:
 
-    dataset = rasterio.open(outputs / layer))
+    dataset = rasterio.open(outputs / layer)
     bbox = dataset.bounds
     geojson = Polygon([[(bbox.left,bbox.top), (bbox.right, bbox.top), (bbox.right,bbox.bottom), (bbox.left, bbox.bottom)]])
 
