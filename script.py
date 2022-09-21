@@ -129,8 +129,7 @@ subprocess.call(['gdal_rasterize',
                  '-burn', '1',		#fixed value to burn for all objects
                  '-tr', '1', '1',	#target resolution <xres> <yres>
                  '-co', 'COMPRESS=LZW', '-co', 'NUM_THREADS=ALL_CPUS',	#creation options
-                 '-ot', 'UInt16',	#output data type
-                 '-at',  			#enable all-touched rasterisation
+                 '-ot', 'UInt16',	#output data type                 
                  *extent,			#'-te' <xmin> <ymin> <xmax> <ymax> 
                  selected_polygons, temp / 'rasterise_1m.tif'])	#src_datasource, dst_filename
 
