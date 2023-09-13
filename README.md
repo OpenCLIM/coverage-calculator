@@ -9,4 +9,4 @@ A single GeoPackage (.gpkg) or Shapefile (.shp) containing polygons is required.
 'gdal_translate' converts to an ascii raster suitable for input to UDM. 
 
 ### Usage
-`docker build -t udm-rasterise-coverage . && docker run -v "data:/data" --name udm-rasterise-coverage udm-rasterise-coverage` 
+`docker build -t udm-rasterise-coverage . && docker run -v "data:/data" --env EXTENT=459000,202000,501000,244000 --env LAYER=test_layer --name udm-rasterise-coverage udm-rasterise-coverage` 
